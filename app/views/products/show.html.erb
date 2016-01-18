@@ -1,4 +1,4 @@
-<h1>Product <%= @product.product_id %></h1>
+<h1><%= "Product reviews for product_id: #{@product.product_id}, freetext: '#{@product.freetext}'" %></h1>
 
 <% unless @product.reviews.any? %>
   <p>No reviews were fetched</p>

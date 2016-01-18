@@ -30,6 +30,6 @@ class ProductsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:product).permit(:product_id)
+    params.require(:product).permit(:product_id, :freetext)
   end
 end

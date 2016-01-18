@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
 
   validates :product_id, presence: true
+  validates :freetext, presence: true
 
   before_create :fetch_reviews
 
@@ -13,6 +14,7 @@ class Product < ActiveRecord::Base
     fetcher.fetch
 
     fetcher.reviews.each do |title, message|
+      next unless message.include?(freetext)
       reviews.build({title: title, message: message})
     end
   end

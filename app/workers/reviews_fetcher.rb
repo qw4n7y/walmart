@@ -11,14 +11,24 @@ class ReviewsFetcher
   end
 
   def fetch
-    tmp = open("https://www.walmart.com/reviews/product/#{@product_id}")
-    html = Nokogiri::HTML(tmp)
+    page = 1
+    done = false
 
-    html.css(".customer-review-body").each do |review_element|
-      title = review_element.css(".customer-review-title").text
-      message = review_element.css(".customer-review-text").text
+    while !done
+      uri = "https://www.walmart.com/reviews/product/#{@product_id}?limit=20&page=#{page}"
+      html = Nokogiri::HTML(open(uri))
 
-      @reviews[ title ] = message
+      review_elements = html.css(".customer-review-body")
+
+      review_elements.each do |review_element|
+        title = review_element.css(".customer-review-title").text
+        message = review_element.css(".customer-review-text").text
+
+        @reviews[ title ] = message
+      end
+
+      page = page + 1
+      done = review_elements.empty?
     end
   end
 
