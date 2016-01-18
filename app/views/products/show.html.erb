@@ -1,0 +1,16 @@
+<h1>Product <%= @product.product_id %></h1>
+
+<% unless @product.reviews.any? %>
+  <p>No reviews were fetched</p>
+<% else %>
+  <ul>
+    <% @product.reviews.each do |review| %>
+      <li>
+        <strong><%= review.title %></strong>
+        <p><%= review.message %></p>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to "Back", products_path %>

@@ -1,0 +1,15 @@
+<h1>Get product reviews</h1>
+
+<%= form_for @product do |f| %>
+  
+  <% if @product.errors.any? %>
+    <p>Please, check the errors: <%= @product.errors.full_messages.join(", ") %></p>
+  <% end %>
+
+  <%= f.label "Product ID" %>
+  <%= f.text_field :product_id %>
+
+  <%= f.submit "Let's go" %>
+<% end %>
+
+<%= link_to "Back", products_path %>
